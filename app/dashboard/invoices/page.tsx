@@ -17,7 +17,7 @@ interface Props {
 const InvoicesPage = async (props: Props) => {
   const query = props.searchParams?.query || '';
   const currentPage = Number(props.searchParams?.page) || 1;
-  const totalPages = await fetchInvoicesPages(query)
+  const totalPages = await fetchInvoicesPages(query);
   return (
     <div className="w-full">
       <div className="flex w-full items-center justify-between">
