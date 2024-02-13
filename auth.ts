@@ -5,6 +5,7 @@ import { z } from 'zod';
 import { sql } from '@vercel/postgres';
 import type { User } from './app/lib/definitions';
 import bcrypt from 'bcrypt';
+import Github from 'next-auth/providers/github';
 
 async function getUser(email: string): Promise<User | undefined> {
   try {
@@ -16,9 +17,18 @@ async function getUser(email: string): Promise<User | undefined> {
   }
 }
 
-export const { auth, signIn, signOut } = NextAuth({
+export const {
+  handlers: { GET, POST },
+  auth,
+  signIn,
+  signOut,
+} = NextAuth({
   ...authConfig,
   providers: [
+    Github({
+      clientId: process.env.AUTH_GITHUB_ID,
+      clientSecret: process.env.AUTH_GITHUB_SECRET,
+    }),
     Credentials({
       async authorize(credentials) {
         const parsedCredentials = z

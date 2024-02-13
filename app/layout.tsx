@@ -1,6 +1,16 @@
 import '@/app/ui/global.css';
 import { ThemeProvider } from './providers/theme-provider';
 import { inter } from './fonts/fonts';
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: {
+    template: '%s | Acme Dashboard',
+    default: 'Acme Dashboard',
+  },
+  description: 'Nextjs Learn Course dashboard',
+  metadataBase: new URL('https://next-learn-dashboard.vercel.sh'),
+};
 
 export default function RootLayout({
   children,

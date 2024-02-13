@@ -139,6 +139,7 @@ export const authenticate = async (
 ) => {
   try {
     await signIn('credentials', formData);
+    // await signIn('github');
   } catch (error) {
     if (error instanceof AuthError) {
       switch (error.type) {
@@ -148,6 +149,17 @@ export const authenticate = async (
           return 'Something went wrong';
       }
     }
+    throw error;
+  }
+};
+
+export const githubLogin = async () => {
+  console.log('github server action');
+  try {
+    await signIn('github');
+    console.log('calling server action');
+  } catch (error) {
+    // return 'Can not Login Using Github';
     throw error;
   }
 };
